@@ -31,8 +31,7 @@ else //mezczyzna
     else
     {
         Console.WriteLine("Mężczyzna jest pełnoletni..");
-    }
-        
+    }    
 }
 
 
