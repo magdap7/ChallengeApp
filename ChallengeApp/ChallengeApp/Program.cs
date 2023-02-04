@@ -4,7 +4,6 @@ String name = "Magdalena";
 int age = 47;
 bool woman = true;
 
-//zaraz chwila prawdy
 if (woman)
 {
     if (age < 30)
