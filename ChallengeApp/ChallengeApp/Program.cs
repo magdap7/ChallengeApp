@@ -1,29 +1,31 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-//Console.WriteLine("Hello, World!");
-String strImie = "Magdalena";
-int iWiek = 47;
-bool bKobieta = true;
+String Name = "Magdalena";
+int Age = 47;
+bool Woman = true;
 
 //zaraz chwila prawdy
-if (bKobieta == true)
+if (Woman == true)
 {
-    if (iWiek < 30)
+    if (Age < 30)
     {
         Console.WriteLine("Kobieta poniżej 30 lat.");       
     }
-    else if ( strImie=="Ewa" && iWiek==33)
+    else//ma co najmniej ma 30 lat
     {
-        Console.WriteLine("Ewa, lat 33.");
-    }
-    else//pisze moje dane
-    {
-        Console.WriteLine("Nazywam się " + strImie + " i mam lat " + iWiek + ".");
+        if (Name == "Ewa" && Age == 33)
+        {
+            Console.WriteLine("Ewa, lat 33.");
+        }
+        else // nie Ewa i nie ma 33 lat
+        {
+            Console.WriteLine("Nazywam się " + Name + " i mam lat " + Age + ".");
+        }
     }
 }
 else //mezczyzna
 {
-    if (iWiek < 18)
+    if (Age < 18)
     {
         Console.WriteLine("Niepełnoletni mężczyzna.");
     }
