@@ -11,6 +11,11 @@ namespace ChallengeApp
         public int age { get; private set; }
 
         //public int result { get { return this.scores.Sum(); } };
+
+        public Employee(String lastName)
+        {
+            this.lastName = lastName;
+        }
         public Employee(String firstName, String lastName, int age)
         {
             this.firstName = firstName;
