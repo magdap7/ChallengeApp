@@ -5,20 +5,31 @@ namespace ChallengeApp.Tests
  
 
         [Test]
-        public void Test1_SumOfPoints()
+        public void Test_EployeeStatistics()
         {
+            //mam pomys³ na test, który porówna, czy taki sam wynik da liczenie statystyk dla pracownika 
+            //metod¹ na piechotê z kursu i gotowymi metodami wbudowanymi z klasy List
 
             //arrange
-            var emp = new Employee("Mag", "Pej", 47);
-            emp.addMarks(new int[2] { 3,7 });//excepted 10
-            emp.addMarks(new int[3] { 1, 6,-4 }); //result 3 instead of 11
+            var employee = new Employee("Mag", "Pej");
+            employee.addMarks(new float[5] { 1.0f, 3.2f, 4.5f, 3.8f, 7.2f });
+            var statistics = employee.getStatistics();
 
             //act
-            var res = emp.getSumOfScores();
+            //metoda 1
+            var min1 = employee.getMin;
+            var max1 = employee.getMax;
+            var ave1 = employee.getAverageScore();
+            //metoda 2
+            var min2 = statistics.Min;
+            var max2 = statistics.Max;
+            var ave2 = statistics.Average;
 
             //assert
-            //Assert.AreEqual(21, res); 
-            Assert.AreEqual(13, res); 
+            Assert.AreEqual(min1, min2); 
+            Assert.AreEqual(max1, max2); 
+            Assert.AreEqual(ave1, ave2); 
+
         }
     }
 }
