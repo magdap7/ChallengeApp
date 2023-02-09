@@ -1,5 +1,7 @@
 ﻿
 
+using System.Diagnostics;
+
 namespace ChallengeApp
 {
     public class Employee
@@ -41,11 +43,57 @@ namespace ChallengeApp
         public float getMin { get { return this.scores.Min(); } }
 
         //metody
-        public void addMarks(float[] points)
-        {
-            for(int i=0;i<points.Length;i++)
-                this.scores.Add(points[i]);
+        public void addGrade(float grade)
+        {//po kursowemu, wygodniej do parsowania
+            if (grade >= 0 && grade <= 100)//walidacja wartości dodawanych punktów
+                this.scores.Add(grade);
+            else//ignoruj punkty i komunikat
+                Console.WriteLine($"{grade}? Wartość oceny ma się zawierać pomiędzy 0 i 100.");
         }
+        public void addGrade(int grade)
+        {
+            float result = (float)grade;
+            this.addGrade(result);
+        }
+        public void addGrade(long grade)
+        {
+            float result = (float)grade;
+            this.addGrade(result);
+        }
+        public void addGrade(short grade)
+        {
+            float result = (float)grade;
+            this.addGrade(result);
+        }
+        public void addGrade(double grade)
+        {
+            float result = (float)grade;
+            this.addGrade(result);
+        }
+        public void addGrade(decimal grade)
+        {
+            float result = (float)grade;
+            this.addGrade(result);
+        }
+        public void addGrade(string grade)
+        {
+            if (float.TryParse(grade, out float result))//walidacja formatu punktów
+                this.addGrade(result);
+            else
+                Console.WriteLine($"{grade}? Oczekiwano liczby typu float.");
+        }
+
+        public void addGrades(float[] points)
+        {//po mojemu - myslalam, że wygodniej do wprowadzania
+            for (int i = 0; i < points.Length; i++)
+                this.addGrade(points[i]);
+        }
+        public void addGrades(String[] points)
+        {//po mojemu - myslalam, że wygodniej do wprowadzania
+            for (int i = 0; i < points.Length; i++)
+                this.addGrade(points[i]);
+        }
+
         public float getSumOfScores()
         {//można propercją
             return this.scores.Sum();
