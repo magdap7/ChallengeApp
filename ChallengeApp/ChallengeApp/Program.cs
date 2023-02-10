@@ -27,7 +27,27 @@ employee.AddGrade(s1);
 employee.AddGrade(s2);
 employee.AddGrade(s3);
 
+
+Console.WriteLine("Statystyki z użyciem Foreach");
 var statistics = employee.GetStatistics();
+Console.WriteLine($"Minimum: {statistics.Min}");
+Console.WriteLine($"Maximum: {statistics.Max}");
+Console.WriteLine($"Average: {statistics.Average:N2}");
+
+Console.WriteLine("Statystyki z użyciem For");
+statistics = employee.GetStatisticsWithFor();
+Console.WriteLine($"Minimum: {statistics.Min}");
+Console.WriteLine($"Maximum: {statistics.Max}");
+Console.WriteLine($"Average: {statistics.Average:N2}");
+
+Console.WriteLine("Statystyki z użyciem While");
+statistics = employee.GetStatisticsWithWhile();
+Console.WriteLine($"Minimum: {statistics.Min}");
+Console.WriteLine($"Maximum: {statistics.Max}");
+Console.WriteLine($"Average: {statistics.Average:N2}");
+
+Console.WriteLine("Statystyki z użyciem DoWhile");
+statistics = employee.GetStatisticsWithDoWhile();
 Console.WriteLine($"Minimum: {statistics.Min}");
 Console.WriteLine($"Maximum: {statistics.Max}");
 Console.WriteLine($"Average: {statistics.Average:N2}");

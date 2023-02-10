@@ -1,6 +1,7 @@
 ﻿
 
 using System.Diagnostics;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace ChallengeApp
 {
@@ -105,14 +106,12 @@ namespace ChallengeApp
 
         //to samo liczone na piechote na kursie
         public Statistics GetStatistics()
-        {
+        {//with foreach
             var statistics = new Statistics();
-            //statystyki
             statistics.Average = 0;
             statistics.Min = float.MaxValue;
             statistics.Max = float.MinValue;
-
-            foreach(var score in this.scores)
+            foreach (var score in this.scores)
             {
                 statistics.Max = Math.Max(statistics.Max, score);
                 statistics.Min = Math.Min(statistics.Min, score);
@@ -121,7 +120,65 @@ namespace ChallengeApp
             statistics.Average /= this.scores.Count;
             return statistics;
         }
+        public Statistics GetStatisticsWithFor()
+        {
+            var statistics = new Statistics();
+            statistics.Average = 0;
+            statistics.Min = float.MaxValue;
+            statistics.Max = float.MinValue;
+            float score;
+            for (int index=0;index<this.scores.Count; index++)
+            {
+                score = this.scores[index];
+                statistics.Max = Math.Max(statistics.Max, score);
+                statistics.Min = Math.Min(statistics.Min, score);
+                statistics.Average += score;
+            }
+            statistics.Average /= this.scores.Count;
+            return statistics;
+        }
+        public Statistics GetStatisticsWithWhile()
+        {
+            var statistics = new Statistics();
+            statistics.Average = 0;
+            statistics.Min = float.MaxValue;
+            statistics.Max = float.MinValue;
+            var index = 0;
+            float score;
+            while (index < this.scores.Count)//do
+            {
+                score = this.scores[index];
+                statistics.Max = Math.Max(statistics.Max, score);
+                statistics.Min = Math.Min(statistics.Min, score);
+                statistics.Average += score;
+                index++;
+            };
+            statistics.Average /= this.scores.Count;
+            return statistics;
+        }
+        public Statistics GetStatisticsWithDoWhile()
+        {
+            var statistics = new Statistics();
+            statistics.Average = 0;
+            statistics.Min = float.MaxValue;
+            statistics.Max = float.MinValue;
 
+            if(this.scores.Count==0)
+                return statistics;//puste po new
+            var index = 0;
+            float score;
+            do
+            {
+                score = this.scores[index];
+                statistics.Max = Math.Max(statistics.Max, score);
+                statistics.Min = Math.Min(statistics.Min, score);
+                statistics.Average += score;
+                index++;
+            }
+            while (index < this.scores.Count);
+            statistics.Average /= this.scores.Count;
+            return statistics;
+        }
 
-    }
+    }  
 }
