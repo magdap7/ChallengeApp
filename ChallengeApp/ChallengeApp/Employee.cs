@@ -43,68 +43,68 @@ namespace ChallengeApp
         public float getMin { get { return this.scores.Min(); } }
 
         //metody
-        public void addGrade(float grade)
+        public void AddGrade(float grade)
         {//po kursowemu, wygodniej do parsowania
             if (grade >= 0 && grade <= 100)//walidacja wartości dodawanych punktów
                 this.scores.Add(grade);
             else//ignoruj punkty i komunikat
                 Console.WriteLine($"{grade}? Wartość oceny ma się zawierać pomiędzy 0 i 100.");
         }
-        public void addGrade(int grade)
+        public void AddGrade(int grade)
         {
             float result = (float)grade;
-            this.addGrade(result);
+            this.AddGrade(result);
         }
-        public void addGrade(long grade)
+        public void AddGrade(long grade)
         {
             float result = (float)grade;
-            this.addGrade(result);
+            this.AddGrade(result);
         }
-        public void addGrade(short grade)
+        public void AddGrade(short grade)
         {
             float result = (float)grade;
-            this.addGrade(result);
+            this.AddGrade(result);
         }
-        public void addGrade(double grade)
+        public void AddGrade(double grade)
         {
             float result = (float)grade;
-            this.addGrade(result);
+            this.AddGrade(result);
         }
-        public void addGrade(decimal grade)
+        public void AddGrade(decimal grade)
         {
             float result = (float)grade;
-            this.addGrade(result);
+            this.AddGrade(result);
         }
-        public void addGrade(string grade)
+        public void AddGrade(string grade)
         {
             if (float.TryParse(grade, out float result))//walidacja formatu punktów
-                this.addGrade(result);
+                this.AddGrade(result);
             else
                 Console.WriteLine($"{grade}? Oczekiwano liczby typu float.");
         }
 
-        public void addGrades(float[] points)
+        public void AddGrades(float[] points)
         {//po mojemu - myslalam, że wygodniej do wprowadzania
             for (int i = 0; i < points.Length; i++)
-                this.addGrade(points[i]);
+                this.AddGrade(points[i]);
         }
-        public void addGrades(String[] points)
+        public void AddGrades(String[] points)
         {//po mojemu - myslalam, że wygodniej do wprowadzania
             for (int i = 0; i < points.Length; i++)
-                this.addGrade(points[i]);
+                this.AddGrade(points[i]);
         }
 
-        public float getSumOfScores()
+        public float GetSumOfScores()
         {//można propercją
             return this.scores.Sum();
         }
-        public float getAverageScore()
+        public float GetAverageScore()
         {//można propercją
             return this.scores.Sum()/this.scores.Count;
         }
 
         //to samo liczone na piechote na kursie
-        public Statistics getStatistics()
+        public Statistics GetStatistics()
         {
             var statistics = new Statistics();
             //statystyki

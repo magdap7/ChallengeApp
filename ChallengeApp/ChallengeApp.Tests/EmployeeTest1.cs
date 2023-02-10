@@ -13,13 +13,13 @@ namespace ChallengeApp.Tests
             //arrange
             var employee = new Employee("Mag", "Pej");
             employee.addMarks(new float[5] { 1.0f, 3.2f, 4.5f, 3.8f, 7.2f });
-            var statistics = employee.getStatistics();
+            var statistics = employee.GetStatistics();
 
             //act
             //metoda 1
             var min1 = employee.getMin;
             var max1 = employee.getMax;
-            var ave1 = employee.getAverageScore();
+            var ave1 = employee.GetAverageScore();
             //metoda 2
             var min2 = statistics.Min;
             var max2 = statistics.Max;
