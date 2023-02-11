@@ -78,12 +78,46 @@ namespace ChallengeApp
         }
         public void AddGrade(string grade)
         {
-            if (float.TryParse(grade, out float result))//walidacja formatu punktów
-                this.AddGrade(result);
+            if (float.TryParse(grade, out float result1))//walidacja formatu punktów
+                this.AddGrade(result1);
+            else if (char.TryParse(grade, out char result2))
+                this.AddGrade(result2);
             else
-                Console.WriteLine($"{grade}? Oczekiwano liczby typu float.");
+                Console.WriteLine($"{grade}? Oczekiwano liczby lub pojedynczego znaku.");
         }
-
+        public void AddGrade(char grade)
+        {
+            switch(grade)
+            {
+                case 'A':
+                case 'a':
+                    this.scores.Add(100);
+                    break;
+                case 'B':
+                case 'b':
+                    this.scores.Add(80);
+                    break;
+                case 'C':
+                case 'c':
+                    this.scores.Add(60);
+                    break;
+                case 'D':
+                case 'd':
+                    this.scores.Add(40);
+                    break;
+                case 'E':
+                case 'e':
+                    this.scores.Add(20);
+                    break;
+                case 'F':
+                case 'f':
+                    this.scores.Add(0);
+                    break;
+                default:
+                    Console.WriteLine("Nieprawidłowy format oceny literowej. Ma być od A do F");
+                    break;
+            }
+        }
         public void AddGrades(float[] points)
         {//po mojemu - myslalam, że wygodniej do wprowadzania
             for (int i = 0; i < points.Length; i++)
@@ -118,6 +152,29 @@ namespace ChallengeApp
                 statistics.Average += score;
             }
             statistics.Average /= this.scores.Count;
+            switch(statistics.Average)
+            {
+                case var a when  a > 80:
+                    statistics.AverageLetter = 'A';
+                    break;
+                case var a when a > 60:
+                    statistics.AverageLetter = 'B';
+                    break;
+                case var a when  a > 40:
+                    statistics.AverageLetter = 'C';
+                    break;
+                case var a when a > 20:
+                    statistics.AverageLetter = 'D';
+                    break;
+                case var a when  a > 0:
+                    statistics.AverageLetter = 'E';
+                    break;
+                default:
+                    statistics.AverageLetter = 'F';
+                    break;
+            }
+
+
             return statistics;
         }
         public Statistics GetStatisticsWithFor()
