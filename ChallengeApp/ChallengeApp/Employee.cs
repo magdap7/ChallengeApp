@@ -8,12 +8,12 @@ namespace ChallengeApp
     public class Employee
     {
         private List<float> scores;
+        private readonly char sex;
+        //private const string logo;
 
         public String firstName { get; private set; }
         public String lastName { get; private set; }
         public int age { get; private set; }
-
-        
 
         //konstruktory
         public Employee()
@@ -31,10 +31,11 @@ namespace ChallengeApp
             this.lastName = lastName;
             this.scores = new List<float>();
         }
-        public Employee(String firstName, String lastName, int age)
+        public Employee(String firstName, String lastName, char sex, int age)
         {
             this.firstName = firstName;
             this.lastName = lastName;
+            this.sex = sex;
             this.age = age;
             this.scores = new List<float>();
         }
@@ -48,8 +49,9 @@ namespace ChallengeApp
         {//po kursowemu, wygodniej do parsowania
             if (grade >= 0 && grade <= 100)//walidacja wartości dodawanych punktów
                 this.scores.Add(grade);
-            else//ignoruj punkty i komunikat
-                Console.WriteLine($"{grade}? Wartość oceny ma się zawierać pomiędzy 0 i 100.");
+            else //rzuć wyjątkiem
+                //Console.WriteLine($"{grade}? Wartość oceny ma się zawierać pomiędzy 0 i 100.");
+                throw new Exception("Invalid grade value");
         }
         public void AddGrade(int grade)
         {
@@ -83,39 +85,35 @@ namespace ChallengeApp
             else if (char.TryParse(grade, out char result2))
                 this.AddGrade(result2);
             else
-                Console.WriteLine($"{grade}? Oczekiwano liczby lub pojedynczego znaku.");
+                //Console.WriteLine($"{grade}? Oczekiwano liczby lub pojedynczego znaku.");
+                throw new Exception("Wrong grade format");
         }
         public void AddGrade(char grade)
         {
             switch(grade)
             {
-                case 'A':
-                case 'a':
+                case 'A' or 'a':
                     this.scores.Add(100);
                     break;
-                case 'B':
-                case 'b':
+                case 'B' or 'b':
                     this.scores.Add(80);
                     break;
-                case 'C':
-                case 'c':
+                case 'C' or 'c':
                     this.scores.Add(60);
                     break;
-                case 'D':
-                case 'd':
+                case 'D' or 'd':
                     this.scores.Add(40);
                     break;
-                case 'E':
-                case 'e':
+                case 'E' or 'e':
                     this.scores.Add(20);
                     break;
-                case 'F':
-                case 'f':
+                case 'F' or 'f':
                     this.scores.Add(0);
                     break;
                 default:
-                    Console.WriteLine("Nieprawidłowy format oceny literowej. Ma być od A do F");
-                    break;
+                    //Console.WriteLine("Nieprawidłowy format oceny literowej. Ma być od A do F");
+                    throw new Exception("Wrong grade letter");
+                    //break;
             }
         }
         public void AddGrades(float[] points)
@@ -134,7 +132,7 @@ namespace ChallengeApp
             return this.scores.Sum();
         }
         public float GetAverageScore()
-        {//można propercją
+        {//nie można propercją
             return this.scores.Sum()/this.scores.Count;
         }
 
