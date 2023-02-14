@@ -1,43 +1,26 @@
 ﻿
-
-using System.Diagnostics;
-using static System.Formats.Asn1.AsnWriter;
-
 namespace ChallengeApp
 {
-    public class Employee
+    public class Employee : Person
     {
         private List<float> scores;
-        private readonly char sex;
-        //private const string logo;
-
-        public String firstName { get; private set; }
-        public String lastName { get; private set; }
-        public int age { get; private set; }
 
         //konstruktory
         public Employee()
+            : this("no name","no name")
         {
             this.scores = new List<float>();
         }
-        public Employee(String lastName)
+        public Employee(String name, String surname)
+            : base(name, surname)
         {
-            this.lastName = lastName;
             this.scores = new List<float>();
         }
-        public Employee(String firstName, String lastName)
+        public Employee(String name, String surname, char gender, int age)
+            : this(name, surname)
         {
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.scores = new List<float>();
-        }
-        public Employee(String firstName, String lastName, char sex, int age)
-        {
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.sex = sex;
-            this.age = age;
-            this.scores = new List<float>();
+            this.Gender = gender;
+            this.Age = age;
         }
 
         //propercje
