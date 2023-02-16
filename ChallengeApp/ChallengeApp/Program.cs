@@ -11,7 +11,8 @@ Console.WriteLine("");
 Console.WriteLine("Wpisz dowolną ilość ocen pracownika w postaci liczby od 0 do 100 lub litery od a do f lub od A do F.");
 Console.WriteLine("Aby wyjść z trybu wprowadzania ocen, naciśnij q.");
 
-var employee = new Employee();
+//var employee = new Employee("A","K");
+var supervisor = new Supervisor();
 string response = "";
 do
 {
@@ -21,15 +22,21 @@ do
         break;
     try
     {
-        employee.AddGrade(response);
+        //employee.AddGrade(response);
+        supervisor.AddGrade(response);
     }
     catch (Exception ex)
     {
-        Console.WriteLine($"Exeption chatched: {ex.Message}");
+        Console.WriteLine($"Exeption catched: {ex.Message}");
     }
 } while (response != "q");
 
-var statistics = employee.GetStatistics();
+
+
+//var statistics = employee.GetStatistics();
+var statistics = supervisor.GetStatistics();
+//supervisor.ShowList();
+
 Console.WriteLine("==========================STATYSTYKI=============================");
 Console.WriteLine($"Minimum: {statistics.Min}");
 Console.WriteLine($"Maximum: {statistics.Max}");
@@ -39,6 +46,10 @@ Console.WriteLine($"Average: {statistics.AverageLetter}");
 
 
 /////////////////////////////////////////////////ZABAWY////////////////////////////////////////////
+///
+
+
+
 //char[] array = new char[3]{'a','b','c'};
 //char c1 = array.Max();  
 //char c2 = array.Min();

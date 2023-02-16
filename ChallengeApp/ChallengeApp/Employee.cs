@@ -1,27 +1,20 @@
 ﻿
 namespace ChallengeApp
 {
-    public class Employee : Person
+    public class Employee : IEmployee //Person
     {
+        public string Name { get; private set; }
+        public string Surname { get; private set; }
         private List<float> scores;
 
         //konstruktory
-        public Employee()
-            : this("no name","no name")
+        public Employee(string name, string surname)
         {
+            this.Name = name;
+            this.Surname = surname;
             this.scores = new List<float>();
         }
-        public Employee(String name, String surname)
-            : base(name, surname)
-        {
-            this.scores = new List<float>();
-        }
-        public Employee(String name, String surname, char gender, int age)
-            : this(name, surname)
-        {
-            this.Gender = gender;
-            this.Age = age;
-        }
+        
 
         //propercje
         public float getMax { get { return this.scores.Max(); } }
