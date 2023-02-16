@@ -5,10 +5,12 @@
 //using System.Threading.Tasks;
 using ChallengeApp;
 
-
 Console.WriteLine("==========================WITAMY=============================");
 Console.WriteLine("");
-Console.WriteLine("Wpisz dowolną ilość ocen pracownika w postaci liczby od 0 do 100 lub litery od a do f lub od A do F.");
+Console.WriteLine("Wpisz dowolną ilość ocen pracownika w jednej z postaci:");
+Console.WriteLine("-oceny szkolnej od 1 do 6, np.: 2, 5+, -4");
+Console.WriteLine("-litery dużej lub małej od a do F");
+Console.WriteLine("-liczby zminnnoprzecinkowej od 0 do 100, np.: 25,0");
 Console.WriteLine("Aby wyjść z trybu wprowadzania ocen, naciśnij q.");
 
 //var employee = new Employee("A","K");

@@ -13,34 +13,31 @@ namespace ChallengeApp
         }
         public void AddGrade(string grade)
         {
-            if (char.TryParse(grade, out char result1))
+            //szuka ocen szkolnych, 2,-4, 5+, etc.
+            int totalGrade = 0;
+            char signL = grade.Last();
+            char signF = grade.First();
+
+            if (signF == '+' || signL == '+')
+                totalGrade = totalGrade + 5;
+            if (signF == '-' || signL == '-')
+                totalGrade = totalGrade - 5;
+            if (signL == '-' || signL == '+')
+                grade = grade.Substring(0, grade.Length - 1);//obcinamy znak z tyłu, bo potrzebna liczba
+            if (int.TryParse(grade, out int result))
             {
-                this.AddGrade(result1);
-            }
-            else if (float.TryParse(grade, out float result2))
-            {
-                this.AddGrade(result2);
+                result = Math.Abs(result);//minus już uwzględniony
+                if (result > 0 && result < 7)
+                    this.scores.Add(totalGrade + (result - 1) * 20);
+                else
+                    throw new Exception("Invalid school grade format");
             }
             else
-            {//szuka ocen szkolnych, 2,-4, 5+, etc.
-                int totalGrade = 0;
-                char signL = grade.Last();
-                char signF = grade.First();
-
-                if (signF == '+' || signL == '+')
-                    totalGrade = totalGrade + 5;
-                if (signF == '-' || signL == '-')
-                    totalGrade = totalGrade - 5;
-                if (signL == '-' || signL == '+')
-                    grade = grade.Substring(0, grade.Length - 1);//obcinamy znak z tyłu, bo potrzebna liczba
-                if (int.TryParse(grade, out int result))
-                {
-                    result = Math.Abs(result);//minus już uwzględniony
-                    if (result > 0 && result < 7)
-                        this.scores.Add(totalGrade + (result - 1) * 20);
-                    else
-                        throw new Exception("Invalid school grade format");
-                }
+            {
+                if (char.TryParse(grade, out char result1))
+                    this.AddGrade(result1);
+                else if (float.TryParse(grade, out float result2))
+                    this.AddGrade(result2);
                 else
                     throw new Exception("Invalid grade");
             }
@@ -88,16 +85,15 @@ namespace ChallengeApp
         {
             throw new NotImplementedException();
         }
-
-        public void ShowList()
-        {
-            string str=this.scores.Count.ToString();
-            Console.WriteLine(str);
-        }
         public Statistics GetStatistics()
         {
             //throw new NotImplementedException();
             var statistics = new Statistics();
+            if(this.scores.Count == 0)
+            {
+                throw new Exception("Empty score list");
+                return statistics;
+            }
             statistics.Min = this.scores.Min();
             statistics.Max = this.scores.Max();
             statistics.Average = this.scores.Average();
