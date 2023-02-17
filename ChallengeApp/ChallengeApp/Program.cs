@@ -8,13 +8,15 @@ using ChallengeApp;
 Console.WriteLine("==========================WITAMY=============================");
 Console.WriteLine("");
 Console.WriteLine("Wpisz dowolną ilość ocen pracownika w jednej z postaci:");
-Console.WriteLine("-oceny szkolnej od 1 do 6, np.: 2, 5+, -4");
+//Console.WriteLine("-oceny szkolnej od 1 do 6, np.: 2, 5+, -4");
 Console.WriteLine("-litery dużej lub małej od a do F");
 Console.WriteLine("-liczby zminnnoprzecinkowej od 0 do 100, np.: 25,0");
 Console.WriteLine("Aby wyjść z trybu wprowadzania ocen, naciśnij q.");
 
-//var employee = new Employee("A","K");
-var supervisor = new Supervisor();
+var employeeInFile = new EmployeeInFile("A","K");
+
+
+
 string response = "";
 do
 {
@@ -24,9 +26,8 @@ do
         break;
     try
     {
-        //employee.AddGrade(response);
-        supervisor.AddGrade(response);
-    }
+        employeeInFile.AddGrade(response);
+    } 
     catch (Exception ex)
     {
         Console.WriteLine($"Exeption catched: {ex.Message}");
@@ -34,22 +35,20 @@ do
 } while (response != "q");
 
 
+var statistics = employeeInFile.GetStatistics();
 
-//var statistics = employee.GetStatistics();
-var statistics = supervisor.GetStatistics();
-//supervisor.ShowList();
+Console.WriteLine("==========================statystyki=============================");
+Console.WriteLine($"minimum: {statistics.Min}");
+Console.WriteLine($"maximum: {statistics.Max}");
+Console.WriteLine($"average: {statistics.Average:n2}");
+//Console.writeline($"average: {statistics.averageletter}");
 
-Console.WriteLine("==========================STATYSTYKI=============================");
-Console.WriteLine($"Minimum: {statistics.Min}");
-Console.WriteLine($"Maximum: {statistics.Max}");
-Console.WriteLine($"Average: {statistics.Average:N2}");
-Console.WriteLine($"Average: {statistics.AverageLetter}");
+
 
 
 
 /////////////////////////////////////////////////ZABAWY////////////////////////////////////////////
 ///
-
 
 
 //char[] array = new char[3]{'a','b','c'};
