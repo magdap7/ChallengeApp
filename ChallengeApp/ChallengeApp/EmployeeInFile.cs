@@ -5,6 +5,7 @@
 //using System.Threading.Tasks;
 
 using System.Diagnostics;
+using System.Diagnostics.Metrics;
 
 namespace ChallengeApp
 {
@@ -91,35 +92,33 @@ namespace ChallengeApp
 
         public override Statistics GetStatistics()
         {
-            var result=new Statistics();
-            var listOfGrades= new List<float>();//pomocnicza lista tymczasowa
+            var listOfGrades = new List<float>();//pomocnicza lista tymczasowa
             if (File.Exists(fileName)) 
             {
                 using (var reader = File.OpenText(fileName))
                 {
                     var line = reader.ReadLine();
                     while (line != null)
-                    {//var number = float.Parse(line);
+                    {
                         if (float.TryParse(line, out float number))
                             if (number >= 0 && number <= 100)
                                 listOfGrades.Add(number);
                             else
-                                throw new Exception($"Grade {number} from file {fileName} is not valid.");
+                                throw new Exception($"Value of grade {number} from file {fileName} is not valid.");
                         else
-                            throw new Exception("Invalid grade in file");
+                            throw new Exception("Invalid grade format in file {fileName}");
                         line = reader.ReadLine();
                     }
                 }
-                result.Min = listOfGrades.Min();
-                result.Max = listOfGrades.Max();
-                result.Average = listOfGrades.Average();
+                var result = new Statistics(listOfGrades);
+                result.CountStatistics();
+                return result;
             }
             else
             {
                 throw new Exception($"File {fileName} dosn't exist.");
             }
-            
-            return result;
+           
         }
     }
 }

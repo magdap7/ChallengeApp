@@ -90,9 +90,12 @@ void PrintStatistics(Statistics statistics)
     Console.WriteLine("");
     Console.WriteLine("==========================STATYSTYKI=============================");
 
-    Console.WriteLine($"minimum: {statistics.Min}");
-    Console.WriteLine($"maximum: {statistics.Max}");
-    Console.WriteLine($"average: {statistics.Average:n2}");
+    Console.WriteLine($"Min: {statistics.Min}");
+    Console.WriteLine($"Max: {statistics.Max}");
+    Console.WriteLine($"Sum: {statistics.Sum}");
+    Console.WriteLine($"Cnt: {statistics.Count}");
+    Console.WriteLine($"Avg: {statistics.Average:n2}");
+    Console.WriteLine($"AvL: {statistics.AverageLetter}");
 }
 
 

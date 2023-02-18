@@ -86,18 +86,9 @@ namespace ChallengeApp
 
         public override Statistics GetStatistics()
         {
-            var statistics = new Statistics();
-            if (this.Scores.Count == 0)
-            {
-                throw new Exception("Empty score list");
-                return statistics;
-            }
-            statistics.Min = this.Scores.Min();
-            statistics.Max = this.Scores.Max();
-            statistics.Average = this.Scores.Average();
-            statistics.AverageLetter = 'X';//niepotrzebne
-            return statistics;
+            var result = new Statistics(this.Scores);
+            result.CountStatistics();
+            return result;
         }
-        
     }
 }
