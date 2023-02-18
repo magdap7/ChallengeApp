@@ -12,11 +12,11 @@ namespace ChallengeApp
     {
         private const string fileName = "grades.txt";//C:\Users\magda\OneDrive\Dokumenty\oQrs
 
-
         public EmployeeInFile(string name, string surname) : base(name, surname)
         {
         }
 
+        public override event GradeAddedDelegate GradeAdded;
         public override void AddGrade(string grade)
         {
             if (int.TryParse(grade, out int resultInt))
@@ -72,6 +72,10 @@ namespace ChallengeApp
                 using (var writer = File.AppendText(fileName))
                 {
                     writer.WriteLine(grade);
+                }
+                if(this.GradeAdded !=null)
+                {
+                    this.GradeAdded(this, new EventArgs());
                 }
             }
             else

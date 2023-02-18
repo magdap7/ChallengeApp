@@ -9,11 +9,13 @@ namespace ChallengeApp
     public class EmployeeInMemory : EmployeeBase
     {
         private List<float> Scores;
+        
         public EmployeeInMemory(string name, string surname) : base(name, surname)
         {
             this.Scores = new List<float>();
         }
 
+        public override event GradeAddedDelegate GradeAdded;
         public override void AddGrade(string grade)
         {
             if (int.TryParse(grade, out int resultInt))
@@ -65,7 +67,13 @@ namespace ChallengeApp
         public override void AddGrade(float grade)
         {
             if (grade >= 0 && grade <= 100)
+            {
                 this.Scores.Add(grade);
+                if(this.GradeAdded != null) 
+                {
+                    this.GradeAdded(this, new EventArgs());
+                }
+            }
             else
                 throw new Exception("Invalid grade value");
         }

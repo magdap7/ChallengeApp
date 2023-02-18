@@ -5,43 +5,98 @@
 //using System.Threading.Tasks;
 using ChallengeApp;
 
+string name, surname, type, response;
+EmployeeInMemory employeeMem;
+EmployeeInFile employeeFile;
+
+
 Console.WriteLine("==========================WITAMY=============================");
 Console.WriteLine("");
-Console.WriteLine("Wpisz dowolną ilość ocen pracownika w jednej z postaci:");
-//Console.WriteLine("-oceny szkolnej od 1 do 6, np.: 2, 5+, -4");
-Console.WriteLine("-litery dużej lub małej od a do F");
-Console.WriteLine("-liczby zminnnoprzecinkowej od 0 do 100, np.: 25,0");
-Console.WriteLine("Aby wyjść z trybu wprowadzania ocen, naciśnij q.");
-
-var employeeInFile = new EmployeeInFile("A","K");
-
+Console.WriteLine($"Podaj imię pracownika:");
+name = Console.ReadLine();
+Console.WriteLine($"Podaj nazwisko pracownika:");
+surname = Console.ReadLine();
+Console.WriteLine($"Podaj typ zapisu ocen pracownika: m albo f (zapis ocen do pamięci lub do pliku.");
+type = Console.ReadLine();
 
 
-string response = "";
-do
+if (type == "m")
 {
-    Console.WriteLine($"Wpisz kolejną ocenę pracownika.");
-    response = Console.ReadLine();
-    if (response == "q")
-        break;
-    try
+    employeeMem = new EmployeeInMemory(name, surname);
+    employeeMem.GradeAdded += EmployeeGradeAdded;
+    PrintInstructions();
+    do
     {
-        employeeInFile.AddGrade(response);
-    } 
-    catch (Exception ex)
+        Console.WriteLine($"Wpisz kolejną ocenę pracownika.");
+        response = Console.ReadLine();
+        if (response == "q")
+            break;
+        try
+        {
+            employeeMem.AddGrade(response);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Exeption catched: {ex.Message}");
+        }
+    } while (response != "q");
+    var statistics = employeeMem.GetStatistics();
+    PrintStatistics(statistics);
+}
+else if (type == "f")
+{
+    employeeFile = new EmployeeInFile(name, surname);
+    employeeFile.GradeAdded += EmployeeGradeAdded;
+    PrintInstructions();
+    do
     {
-        Console.WriteLine($"Exeption catched: {ex.Message}");
-    }
-} while (response != "q");
+        Console.WriteLine($"Wpisz kolejną ocenę pracownika.");
+        response = Console.ReadLine();
+        if (response == "q")
+            break;
+        try
+        {
+            employeeFile.AddGrade(response);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Exeption catched: {ex.Message}");
+        }
+    } while (response != "q");
+    var statistics = employeeFile.GetStatistics();
+    PrintStatistics(statistics);
+}
+else
+{
+    Console.WriteLine("nie wybrano typu zapisywania ocen.");
+}
 
 
-var statistics = employeeInFile.GetStatistics();
+void EmployeeGradeAdded(object sender, EventArgs args)
+{
+    Console.WriteLine("Dodano ocenę.");
+}
 
-Console.WriteLine("==========================statystyki=============================");
-Console.WriteLine($"minimum: {statistics.Min}");
-Console.WriteLine($"maximum: {statistics.Max}");
-Console.WriteLine($"average: {statistics.Average:n2}");
-//Console.writeline($"average: {statistics.averageletter}");
+void PrintInstructions()
+{
+    Console.WriteLine("Wpisz dowolną ilość ocen pracownika w jednej z postaci:");
+    Console.WriteLine("-litery dużej lub małej od a do F");
+    Console.WriteLine("-liczby zminnnoprzecinkowej od 0 do 100, np.: 25,0");
+    Console.WriteLine("Aby wyjść z trybu wprowadzania ocen, naciśnij q.");
+}
+
+void PrintStatistics(Statistics statistics)
+{
+    Console.WriteLine("");
+    Console.WriteLine("==========================STATYSTYKI=============================");
+
+    Console.WriteLine($"minimum: {statistics.Min}");
+    Console.WriteLine($"maximum: {statistics.Max}");
+    Console.WriteLine($"average: {statistics.Average:n2}");
+}
+
+
+
 
 
 
